@@ -1,0 +1,91 @@
+Public Class female
+    Private age As String
+    Private kg As String
+    Private sbros As String
+    Private time As String
+    Public Event somesbrasves(ByVal newsbrasves As Single)
+    Public Event trainskolko(ByVal newtrain As Integer)
+    Public Property Vozrast() As String
+        Get
+            Return age
+        End Get
+        Set(ByVal value As String)
+            age = value
+            Select Case age
+                Case "18-30"
+                    age = 5
+                Case "30-40"
+                    age = 6
+                Case "40-55"
+                    age = 7
+            End Select
+        End Set
+    End Property
+    Public Property Ves() As String
+        Get
+            Return kg
+        End Get
+        Set(ByVal value As String)
+            kg = value
+            Select Case kg
+                Case "45-55"
+                    kg = 50
+                Case "55-65"
+                    kg = 60
+                Case "65-75"
+                    kg = 70
+                Case "75-85"
+                    kg = 80
+                Case "85-95"
+                    kg = 90
+            End Select
+        End Set
+    End Property
+    Public Property SbrosKg() As String
+        Get
+            Return sbros
+        End Get
+        Set(ByVal value As String)
+            sbros = value
+            Select Case sbros
+                Case "5-10"
+                    sbros = 10
+                Case "10-15"
+                    sbros = 15
+                Case "15-20"
+                    sbros = 20
+                Case "20-25"
+                    sbros = 25
+            End Select
+        End Set
+    End Property
+    Public Property Vremya() As String
+        Get
+            Return time
+        End Get
+        Set(ByVal value As String)
+            time = value
+            Select Case time
+                Case "30 минут"
+                    time = 0.3
+                Case "45 минут"
+                    time = 0.45
+                Case "1 час"
+                    time = 1
+                Case "1 час 15 минут"
+                    time = 1.15
+                Case "1 час 30 минут"
+                    time = 1.3
+            End Select
+        End Set
+    End Property
+    Public Overridable Sub SbrasVes(ByRef sbras As Single)
+        sbras = (Val(Ves) + Val(SbrosKg) + Val(Vremya)) / 10 - (Val(Vozrast) - 4.25)
+        'sbras = Format((Val(Ves) + Val(SbrosKg) + Val(Vremya)) / 10 - (Val(Vozrast) - 4.25), "##0.00")
+        RaiseEvent somesbrasves(sbras)
+    End Sub
+    Sub Skolko(ByRef sk As Integer)
+        sk = (Val(Ves) - Val(SbrosKg) - Val(Vozrast)) / 6
+        RaiseEvent trainskolko(sk)
+    End Sub
+End Class
