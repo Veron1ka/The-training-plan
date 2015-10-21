@@ -1,0 +1,25 @@
+Public Class male
+    Inherits female
+    Private mish As String
+    Public Event somesbrasves1(ByVal newsbrasves As Single)
+    Public Overloads Sub SbrasVes(ByRef sbras As Single)
+        sbras = Format((Val(Ves) + Val(SbrosKg) + Val(Vremya)) / 10 - (Val(Vozrast) - 4.25), "##0.00")
+        RaiseEvent somesbrasves1(sbras)
+    End Sub
+    Public Property Mishza() As String
+        Get
+            Return mish
+        End Get
+        Set(ByVal value As String)
+            mish = value
+            Select Case mish
+                Case "25-35"
+                    mish = 3
+                Case "45-55"
+                    mish = 5
+                Case "65-75"
+                    mish = 7
+            End Select
+        End Set
+    End Property
+End Class
