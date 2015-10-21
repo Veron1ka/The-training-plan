@@ -1,0 +1,144 @@
+Public Class Form1
+    Private wowfemale As New female
+    Private wowmale As New male
+    Private a, b As Single
+    Private c, c1 As Integer
+    Dim jam As Boolean
+    'Sub gogo()
+    '    If a >= 5 Then
+    '        MsgBox("Вам необходима консультация диетолога", MsgBoxStyle.Exclamation)
+    '    Else
+
+    '    End If
+    'End Sub
+    Sub doit()
+        ListBox1.Items.Clear()
+        ListBox2.Items.Clear()
+        If RadioButton1.Checked Then
+            PictureBox1.Image = My.Resources.woman
+            'AddHandler wowfemale.somesbrasves, AddressOf gogo
+            wowfemale.SbrasVes(a)
+            wowfemale.Skolko(b)
+            Label5.Visible = False
+            ComboBox5.Visible = False
+            ListBox1.Items.Add("Пол:" & RadioButton1.Text)
+        ElseIf RadioButton2.Checked Then
+            PictureBox1.Image = My.Resources.man
+            'AddHandler wowmale.somesbrasves1, AddressOf gogo
+            wowmale.SbrasVes(a)
+            wowmale.Skolko(b)
+            Label5.Visible = True
+            ComboBox5.Visible = True
+            ListBox1.Items.Add("Пол:" & RadioButton2.Text)
+        End If
+        ListBox1.Items.Add("Возраст:" & ComboBox1.Text)
+        ListBox1.Items.Add("Вес:" & ComboBox2.Text)
+        ListBox1.Items.Add("Желательно сбросить:" & ComboBox3.Text)
+        ListBox1.Items.Add("Время тренировки:" & ComboBox4.Text)
+        If RadioButton1.Checked Then
+            ListBox1.Items.Add("Мышечная масса:" & ComboBox5.Text)
+        End If
+        ListBox2.Items.Add("Сбрасываемый вес за 3 недели тренировок: " & a)
+        ListBox2.Items.Add("Количество занятий для достижения результата: " & b)
+    End Sub
+    Sub doitagain()
+        If RadioButton1.Checked Then
+            wowfemale.Vozrast = ComboBox1.Text
+            wowfemale.Ves = ComboBox2.Text
+            wowfemale.SbrosKg = ComboBox3.Text
+            wowfemale.Vremya = ComboBox4.Text
+        Else
+            wowmale.Vozrast = ComboBox1.Text
+            wowmale.Ves = ComboBox2.Text
+            wowmale.SbrosKg = ComboBox3.Text
+            wowmale.Vremya = ComboBox4.Text
+            wowmale.Mishza = ComboBox5.Text
+        End If
+        'ComboBox1.SelectedIndex = 0
+        'ComboBox2.SelectedIndex = 0
+        'ComboBox3.SelectedIndex = 0
+        'ComboBox4.SelectedIndex = 0
+        'ComboBox5.SelectedIndex = 0
+        doit()
+    End Sub
+
+    Private Sub RadioButton1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton1.CheckedChanged
+        doitagain()
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
+        If RadioButton1.Checked Then
+            wowfemale.Vozrast = ComboBox1.Text
+        Else
+            wowmale.Vozrast = ComboBox1.Text
+        End If
+        doit()
+    End Sub
+
+    Private Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
+        If RadioButton1.Checked Then
+            wowfemale.Ves = ComboBox2.Text
+        Else
+            wowmale.Ves = ComboBox2.Text
+        End If
+        doit()
+    End Sub
+
+    Private Sub ComboBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox3.SelectedIndexChanged
+        If RadioButton1.Checked Then
+            wowfemale.SbrosKg = ComboBox3.Text
+        Else
+            wowmale.SbrosKg = ComboBox3.Text
+        End If
+        doit()
+    End Sub
+
+    Private Sub ComboBox4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox4.SelectedIndexChanged
+        If RadioButton1.Checked Then
+            wowfemale.Vremya = ComboBox4.Text
+        Else
+            wowmale.Vremya = ComboBox4.Text
+        End If
+        doit()
+    End Sub
+
+    Private Sub ComboBox5_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox5.SelectedIndexChanged
+        wowmale.Mishza = ComboBox1.Text
+        doit()
+    End Sub
+    Sub doit2()
+        ListBox2.Items.Clear()
+        If RadioButton1.Checked = True Then
+            AddHandler wowfemale.trainskolko, AddressOf some
+            wowfemale.Skolko(b)
+        ElseIf RadioButton2.Checked = True Then
+            AddHandler wowmale.trainskolko, AddressOf some
+            wowmale.Skolko(b)
+        End If
+        ListBox2.Items.Add("Количество занятий для достижения результата: " & b)
+        If jam = True Then
+            ListBox2.Items.Add("Количество занятий для достижения результата: " & c1)
+        Else
+            ListBox2.Items.Add("Количество занятий для достижения результата: " & b)
+
+        End If
+    End Sub
+    Sub some()
+        c1 = b
+        If RadioButton1.Checked Then
+            If b >= 5 Then
+                wowfemale.doitagain(c1)
+                jam = True
+            Else
+                jam = False
+            End If
+        ElseIf RadioButton2.Checked Then
+            If b >= 1200 Then
+                wowmale.doitagain(c1)
+                jam = True
+            Else
+                jam = False
+            End If
+        End If
+    End Sub
+End Class
